@@ -1,0 +1,16 @@
+.Form-Area {
+    font: inherit;
+    display: block;
+    border: 1px solid #eeeff1;
+    padding: 1em;
+    outline: 0;
+    resize: none;
+    width: 100%;
+}
+
+.Form-Submit {
+    background-color: #ffb74d;
+    padding: .5em;
+    border-radius: .25em;
+    text-align: center;
+}

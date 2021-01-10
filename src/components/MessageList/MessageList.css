@@ -1,0 +1,14 @@
+.MessageList {
+    background-color: #b0bec5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1em;
+}
+
+.MessageList-Item {
+    background-color: #dcedc8;
+    padding: .75em;
+    margin: .2em;
+    border-radius: .25em;
+}
