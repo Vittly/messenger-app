@@ -1,0 +1,11 @@
+.FriendList-Item {
+    cursor: pointer;
+    padding: .4em;
+}
+
+.FriendList-Item[data-selected] {
+    background-color: #00796b;
+    color: white;
+}
+
+

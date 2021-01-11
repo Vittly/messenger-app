@@ -8,7 +8,10 @@ import {
 
 function getEvents(dispatch: TDispatch): IEvents {
     return {
-        onSend: text => dispatch({ type: 'send', text })
+        onSend: (authorId, recipientId, text) =>
+            dispatch({ type: 'send', text, authorId, recipientId }),
+        onSelectFriend: friendId =>
+            dispatch({ type: 'select-friend', friendId })
     };
 }
 

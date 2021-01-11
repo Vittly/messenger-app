@@ -2,13 +2,30 @@
     background-color: #b0bec5;
     display: flex;
     flex-direction: column;
+    flex: 1;
     align-items: flex-end;
     padding: 1em;
 }
 
 .MessageList-Item {
-    background-color: #dcedc8;
+    width: 100%;
+    display: flex;
+}
+
+.MessageList-Item[data-type=out] {
+    justify-content: flex-end;
+}
+
+.MessageList-ItemBubble {
     padding: .75em;
     margin: .2em;
     border-radius: .25em;
+}
+
+.MessageList-Item[data-type=out] .MessageList-ItemBubble {
+    background-color: #dcedc8;
+}
+
+.MessageList-Item[data-type=in] .MessageList-ItemBubble {
+    background-color: white;
 }
