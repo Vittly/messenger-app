@@ -1,16 +1,18 @@
 import React, { useRef } from 'react';
+import { useObservable } from 'rxjs-hooks';
+import { userId$, selectedFriendId$ } from '../../state/observables';
+import { onSend } from '../../state/callbacks';
 import './Form.css';
 
-interface IForm {
-    onSend: (text: string) => void;
-}
-
-const Form: React.FC<IForm> = props => {
+const Form: React.FC = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const onSubmit = () => {
-        if (!textareaRef.current) return;
+    const userId = useObservable(() => userId$);
+    const selectedFriendId = useObservable(() => selectedFriendId$);
 
-        props.onSend(textareaRef.current.value);
+    const onSubmit = () => {
+        if (!textareaRef.current || !userId || !selectedFriendId) return;
+
+        onSend(userId, selectedFriendId, textareaRef.current.value);
         textareaRef.current.value = '';
     };
 
@@ -20,4 +22,4 @@ const Form: React.FC<IForm> = props => {
     </div>;
 };
 
-export default React.memo(Form);
+export default Form;

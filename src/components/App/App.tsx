@@ -1,6 +1,6 @@
 import React from 'react';
-import { useStateEvents } from '../../state/hooks';
-import { stateMessageFilterCallback } from '../../state/utils';
+import { useObservable } from 'rxjs-hooks';
+import { selectedFriendId$ } from '../../state/observables';
 import FriendList from '../FriendList/FriendList';
 import MessageList from '../MessageList/MessageList';
 import Form from '../Form/Form';
@@ -8,29 +8,18 @@ import Form from '../Form/Form';
 import './App.css';
 
 const App = () => {
-    const [state, events] = useStateEvents();
-    const sendToSelectedFriend = React.useCallback(
-        (text: string) => state.selectedFriendId && events.onSend(state.userId, state.selectedFriendId, text),
-        [state.selectedFriendId]
-    );
+    const selectedFriendId = useObservable(() => selectedFriendId$);
 
     return <div className="App">
         <div className="App-LeftPanel">
-            <FriendList
-                items={state.friends}
-                selectedId={state.selectedFriendId}
-                onSelect={events.onSelectFriend}
-            />
+            <FriendList />
         </div>
         <div className="App-RightPanel">
             {
-                state.selectedFriendId ?
+                selectedFriendId ?
                     <>
-                        <MessageList
-                            userId={state.userId}
-                            items={state.messages.filter(m => stateMessageFilterCallback(state, m))}
-                        />
-                        <Form onSend={sendToSelectedFriend} />
+                        <MessageList />
+                        <Form />
                     </> :
                     null
             }

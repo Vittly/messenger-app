@@ -1,20 +1,19 @@
-import { IUser } from '../../types';
+import { useObservable } from 'rxjs-hooks';
+import { friends$, selectedFriendId$ } from '../../state/observables';
+import { onSelectFriend } from '../../state/callbacks';
 import './FriendList.css';
 
-interface IFriendList {
-    items: IUser[];
-    selectedId?: string;
-    onSelect: (friendId: string) => void;
-}
+const FriendList: React.FC = () => {
+    const friends = useObservable(() => friends$);
+    const selectedFriendId = useObservable(() => selectedFriendId$);
 
-const FriendList: React.FC<IFriendList> = props => {
     return <div className="FriendList">
-        {props.items.map(item =>
+        {friends && friends.map(item =>
             <div
                 key={item.id}
                 className="FriendList-Item"
-                data-selected={props.selectedId === item.id ? true : null}
-                onClick={() => props.onSelect(item.id)}
+                data-selected={selectedFriendId === item.id ? true : null}
+                onClick={() => onSelectFriend(item.id)}
             >
                 {item.name}
             </div>
